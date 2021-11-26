@@ -25,14 +25,25 @@ public class UsuarioController {
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<UsuarioModel> obtenerUsuarioPorId(@PathVariable("id")Long id){
-        return this.usuarioService.obtenerPorId(id);
+    public Object obtenerUsuarioPorId(@PathVariable("id")Long id){
+        Optional<UsuarioModel> usuarioModel = this.usuarioService.obtenerPorId(id);
+        if(usuarioModel.isEmpty()) {
+            return "El usuario con id: " + id + "no se encuentra registrado en la base de datos";
+        }else {
+            return usuarioModel;
+        }
     }
 
     @GetMapping("/query")
     public ArrayList<UsuarioModel> obtenerUsuarioPorPrioridad(@RequestParam("prioridad") Integer prioridad){
         return this.usuarioService.obtenerPorPrioridad(prioridad);
     }
+
+    @GetMapping("/nombre")
+    public ArrayList<UsuarioModel> obtenerUsuarioPorNombre(@RequestParam("nombre") String nombre){
+        return this.usuarioService.obtenerPorNombre(nombre);
+    }
+
 
     @DeleteMapping( path = "/{id}")
     public String elimiarUsuarioPorId(@PathVariable("id") Long id){
