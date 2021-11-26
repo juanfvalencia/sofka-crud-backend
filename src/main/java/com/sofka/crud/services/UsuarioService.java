@@ -5,7 +5,6 @@ import com.sofka.crud.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -34,7 +33,7 @@ public class UsuarioService {
         return usuarioRepository.findByNombre(nombre);
     }
 
-    public ArrayList<UsuarioModel> obtenerPorEmail(String email){
+    public Optional<UsuarioModel> obtenerPorEmail(String email){
         return usuarioRepository.findByEmail(email);
     }
 

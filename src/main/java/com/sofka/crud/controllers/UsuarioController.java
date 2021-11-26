@@ -28,7 +28,7 @@ public class UsuarioController {
     public Object obtenerUsuarioPorId(@PathVariable("id")Long id){
         Optional<UsuarioModel> usuarioModel = this.usuarioService.obtenerPorId(id);
         if(usuarioModel.isEmpty()) {
-            return "El usuario con id: " + id + "no se encuentra registrado en la base de datos";
+            return "El usuario con id: " + id + " no se encuentra registrado en la base de datos.";
         }else {
             return usuarioModel;
         }
@@ -45,11 +45,16 @@ public class UsuarioController {
     }
 
     @GetMapping("/email")
-    public ArrayList<UsuarioModel> obtenerUsuarioPorEmail(@RequestParam("email") String email){
-        return this.usuarioService.obtenerPorEmail(email);
+    public Object obtenerUsuarioPorEmail(@RequestParam("email") String email){
+        Optional<UsuarioModel> usuarioModel = this.usuarioService.obtenerPorEmail(email);
+        if(usuarioModel.isEmpty()){
+            return "El usuario con email: " + email + " no se encuentra registrado en la base de datos.";
+        }else{
+            return usuarioModel;
+        }
     }
 
-    @DeleteMapping( path = "/{id}")
+    @DeleteMapping(path = "/{id}")
     public String elimiarUsuarioPorId(@PathVariable("id") Long id){
         boolean ok = this.usuarioService.eliminarUsuarioPorId(id);
         if(ok){
