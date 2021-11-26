@@ -5,6 +5,7 @@ import com.sofka.crud.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -31,6 +32,10 @@ public class UsuarioService {
 
     public ArrayList<UsuarioModel> obtenerPorNombre(String nombre){
         return usuarioRepository.findByNombre(nombre);
+    }
+
+    public ArrayList<UsuarioModel> obtenerPorEmail(String email){
+        return usuarioRepository.findByEmail(email);
     }
 
     public boolean eliminarUsuarioPorId(Long id){

@@ -44,6 +44,10 @@ public class UsuarioController {
         return this.usuarioService.obtenerPorNombre(nombre);
     }
 
+    @GetMapping("/email")
+    public ArrayList<UsuarioModel> obtenerUsuarioPorEmail(@RequestParam("email") String email){
+        return this.usuarioService.obtenerPorEmail(email);
+    }
 
     @DeleteMapping( path = "/{id}")
     public String elimiarUsuarioPorId(@PathVariable("id") Long id){
